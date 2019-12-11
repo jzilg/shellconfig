@@ -1,7 +1,7 @@
 setopt PROMPT_SUBST
 
 source ~/.shell/sh/alias.sh
-source ~/.shell/sh/colors.sh
+source ~/.shell/sh/color.sh
 source ~/.shell/sh/history.sh
 
 source ~/.shell/zsh/autosuggestions.zsh
