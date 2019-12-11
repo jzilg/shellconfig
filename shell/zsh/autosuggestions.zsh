@@ -4,4 +4,3 @@ ZSH_AUTOSUGGEST_STRATEGY=(
     history
     match_prev_cmd
 )
-
