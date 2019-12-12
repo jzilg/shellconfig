@@ -2,6 +2,11 @@
 
 ## Install
 
+### Clone and go into dir
+```
+git clone https://github.com/jzilg/shellconfig.git
+cd shellconfig
+```
 ### Copy Files into root dir 
 ```
 cp zshrc ~/.zshrc
