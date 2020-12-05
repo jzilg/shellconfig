@@ -16,7 +16,6 @@ cp -r shell ~/.shell
 ### Load Dependencies (for zsh only)
 ```
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.shell/zsh/zsh-autosuggestions
-git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/.shell/zsh/zsh-git-prompt
 
 mkdir ~/.shell/zsh/zsh-git-completion
 cd ~/.shell/zsh/zsh-git-completion
