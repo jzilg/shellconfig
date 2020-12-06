@@ -52,7 +52,7 @@ git_prompt() {
         conflictedFiles=" ${RED}${BOLD}$conflictedFilesCount Conflicted!${NORMAL}"
       fi
 
-      echo "${ORANGE}[${branchName}${ahead}${behind}${conflictedFiles}${stagedFiles}${notStagedFiles}${untrackedFiles}${ORANGE}] ${DEFAULT_COLOR}"
+      echo "${ORANGE}[${branchName}${ahead}${behind}${conflictedFiles}${stagedFiles}${notStagedFiles}${untrackedFiles}${ORANGE}]${DEFAULT_COLOR}"
     fi
   fi
 }
