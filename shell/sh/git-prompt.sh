@@ -1,3 +1,5 @@
+#!/bin/sh
+
 git_prompt() {
   insideGitRepo="$(git status 2>/dev/null)"
 

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ###-begin-npm-completion-###
 if type complete &>/dev/null; then
   _npm_completion () {

@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # alias some commands
 alias ll='ls -la'
 alias ls='ls -FH'
