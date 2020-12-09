@@ -15,7 +15,7 @@ git_prompt() {
     gitStatus=$(git status -sb)
     branchName=$(git branch --show-current)
 
-    if [[ -n "$(git status | grep "^rebase in progress")" ]]; then
+    if git status | grep -q "^rebase in progress"; then
       branchName="${RED}${BOLD}Rebasing →"
     fi
 
@@ -25,13 +25,13 @@ git_prompt() {
 
     aheadCount=$(echo "$gitStatus" | grep -o "ahead [0-9]*" | grep -o "[0-9]*$")
     ahead=
-    if [[ "$aheadCount" -gt 0 ]]; then
+    if [ "$aheadCount" -gt 0 ]; then
       ahead="${DEFAULT_COLOR}↑${aheadCount}"
     fi
 
     behindCount=$(echo "$gitStatus" | grep -o "behind [0-9]*" | grep -o "[0-9]*$")
     behind=
-    if [[ "$behindCount" -gt 0 ]]; then
+    if [ "$behindCount" -gt 0 ]; then
       behind="${DEFAULT_COLOR}↓${behindCount}"
     fi
 
@@ -46,19 +46,19 @@ git_prompt() {
 
       notStagedFilesCount=$(echo "$gitStatus" | grep -Ec '^(.M|.A|.R|.C|.D)')
       notStagedFiles=
-      if [[ "$notStagedFilesCount" -gt 0 ]]; then
+      if [ "$notStagedFilesCount" -gt 0 ]; then
         notStagedFiles=" ${RED}●$notStagedFilesCount"
       fi
 
       stagedFilesCount=$(echo "$gitStatus" | grep -Ec '^(M|A|R|C|D)')
       stagedFiles=
-      if [[ "$stagedFilesCount" -gt 0 ]]; then
+      if [ "$stagedFilesCount" -gt 0 ]; then
         stagedFiles=" ${GREEN}●$stagedFilesCount"
       fi
 
       conflictedFilesCount=$(echo "$gitStatus" | grep -Ec "^(DD|AU|UD|UA|DU|AA|UU)")
       conflictedFiles=
-      if [[ "$conflictedFilesCount" -gt 0 ]]; then
+      if [ "$conflictedFilesCount" -gt 0 ]; then
         conflictedFiles=" ${RED}${BOLD}$conflictedFilesCount Conflicted!${NORMAL}"
       fi
 
