@@ -15,9 +15,12 @@ git_prompt() {
     gitStatus=$(git status -sb)
     branchName=$(git branch --show-current)
 
-    isRebasing=$(git status | grep "^rebase in progress")
-    if [[ -n "$isRebasing" ]]; then
+    if [[ -n "$(git status | grep "^rebase in progress")" ]]; then
       branchName="${RED}${BOLD}Rebasing →"
+    fi
+
+    if [ -n "$(git stash list)" ]; then
+        stashedFiles=" ${DEFAULT_COLOR}*"
     fi
 
     aheadCount=$(echo "$gitStatus" | grep -o "ahead [0-9]*" | grep -o "[0-9]*$")
@@ -32,8 +35,8 @@ git_prompt() {
       behind="${DEFAULT_COLOR}↓${behindCount}"
     fi
 
-    if [ -z "$(git status --porcelain)" ]; then
-      echo "${ORANGE}[${branchName}${ahead}${behind} ${GREEN}${BOLD}✔${NORMAL}${ORANGE}]${DEFAULT_COLOR}"
+    if [ "$(echo "$gitStatus" | wc -l | xargs)" -eq 1 ]; then
+      echo "${ORANGE}[${branchName}${ahead}${behind} ${GREEN}${BOLD}✔${NORMAL}${stashedFiles}${ORANGE}]${DEFAULT_COLOR}"
     else
       untrackedFilesCount=$(echo "$gitStatus" | grep -c "??")
       untrackedFiles=
@@ -59,7 +62,7 @@ git_prompt() {
         conflictedFiles=" ${RED}${BOLD}$conflictedFilesCount Conflicted!${NORMAL}"
       fi
 
-      echo "${ORANGE}[${branchName}${ahead}${behind}${conflictedFiles}${stagedFiles}${notStagedFiles}${untrackedFiles}${ORANGE}]${DEFAULT_COLOR}"
+      echo "${ORANGE}[${branchName}${ahead}${behind}${conflictedFiles}${stagedFiles}${notStagedFiles}${untrackedFiles}${stashedFiles}${ORANGE}]${DEFAULT_COLOR}"
     fi
   fi
 }
