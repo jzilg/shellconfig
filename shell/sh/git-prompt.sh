@@ -15,6 +15,11 @@ git_prompt() {
     gitStatus=$(git status -sb)
     branchName=$(git branch --show-current)
 
+    isRebasing=$(git status | grep "^rebase in progress")
+    if [[ -n "$isRebasing" ]]; then
+      branchName="${RED}${BOLD}Rebasing →"
+    fi
+
     aheadCount=$(echo "$gitStatus" | grep -o "ahead [0-9]*" | grep -o "[0-9]*$")
     ahead=
     if [[ "$aheadCount" -gt 0 ]]; then
