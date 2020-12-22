@@ -4,14 +4,6 @@ git_prompt() {
   insideGitRepo="$(git status 2>/dev/null)"
 
   if [ "$insideGitRepo" ]; then
-    DEFAULT_COLOR="\033[0m"
-    RED="\033[0;31m"
-    GREEN="\033[0;32m"
-    ORANGE="\033[0;33m"
-
-    BOLD=$(tput bold)
-    NORMAL=$(tput sgr0)
-
     gitStatus=$(git status -sb)
     branchName=$(git branch --show-current)
 
@@ -36,7 +28,7 @@ git_prompt() {
     fi
 
     if [ "$(echo "$gitStatus" | wc -l | xargs)" -eq 1 ]; then
-      echo "${ORANGE}[${branchName}${ahead}${behind} ${GREEN}${BOLD}✔${NORMAL}${stashedFiles}${ORANGE}]${DEFAULT_COLOR}"
+      echo "${YELLOW}[${branchName}${ahead}${behind} ${GREEN}${BOLD}✔${NORMAL}${stashedFiles}${YELLOW}]${DEFAULT_COLOR}"
     else
       untrackedFilesCount=$(echo "$gitStatus" | grep -c "??")
       untrackedFiles=
@@ -62,7 +54,7 @@ git_prompt() {
         conflictedFiles=" ${RED}${BOLD}$conflictedFilesCount Conflicted!${NORMAL}"
       fi
 
-      echo "${ORANGE}[${branchName}${ahead}${behind}${conflictedFiles}${stagedFiles}${notStagedFiles}${untrackedFiles}${stashedFiles}${ORANGE}]${DEFAULT_COLOR}"
+      echo "${YELLOW}[${branchName}${ahead}${behind}${conflictedFiles}${stagedFiles}${notStagedFiles}${untrackedFiles}${stashedFiles}${YELLOW}]${DEFAULT_COLOR}"
     fi
   fi
 }
